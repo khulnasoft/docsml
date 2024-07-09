@@ -1,3 +1,4 @@
+# Based on https://github.com/khulnasoft/ml-buildkit/blob/v0.6.12/workflows/build-pipeline.yml
 name: build-pipeline
 
 on:
@@ -20,73 +21,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Set input build args
-        if: ${{ github.event.inputs != null && github.event.inputs.build_args != null }}
-        run: echo "BUILD_ARGS=${{ github.event.inputs.build_args }}" >> "$GITHUB_ENV"
-
-      - name: Set input working directory
-        if: ${{ github.event.inputs != null && github.event.inputs.working_directory != null }}
-        run: echo "WORKING_DIRECTORY=${{ github.event.inputs.working_directory }}" >> "$GITHUB_ENV"
-
-      - name: Set host IP
-        run: echo "_HOST_IP=$(hostname -I | cut -d ' ' -f 1)" >> "$GITHUB_ENV"
-
+      - name: set-input-build-args
+        if: ${{ github.event.inputs != null  &&  github.event.inputs.build_args != null}}
+        run: echo "BUILD_ARGS=${{ github.event.inputs.build_args }}" >> $GITHUB_ENV
+        # new syntax: run: echo "BUILD_ARGS=${{ github.event.inputs.build_args }}" >> "$GITHUB_ENV"
+      - name: set-input-working-directory
+        if: ${{ github.event.inputs != null  &&  github.event.inputs.working_directory != null}}
+        run: echo "WORKING_DIRECTORY=${{ github.event.inputs.working_directory }}" >> $GITHUB_ENV
+        # new syntax: run: echo "WORKING_DIRECTORY=${{ github.event.inputs.working_directory }}" >> "$GITHUB_ENV"
+      # Set host ip to env variable to be uside within container actions
+      - name: set-host-ip
+        run: echo "_HOST_IP=$(hostname -I | cut -d ' ' -f 1)" >> $GITHUB_ENV
       - uses: actions/checkout@v2
-
-      - name: Log environment variables
-        run: |
-          echo "BUILD_ARGS=$BUILD_ARGS"
-          echo "WORKING_DIRECTORY=$WORKING_DIRECTORY"
-          echo "_HOST_IP=$_HOST_IP"
-
-      - name: Run Docker command
-        run: |
-          docker_output=$(docker run --name f850b57ac4555353af7f0cec0db71476_9cefdc --label 549009 --workdir /github/workspace --rm \
-            -e "BUILD_ARGS=$BUILD_ARGS" \
-            -e "WORKING_DIRECTORY=$WORKING_DIRECTORY" \
-            -e "_HOST_IP=$_HOST_IP" \
-            -e "GITHUB_TOKEN=$GITHUB_TOKEN" \
-            -e "INPUT_BUILD_ARGS=$BUILD_ARGS" \
-            -e "INPUT_WORKING_DIRECTORY=$WORKING_DIRECTORY" \
-            -e "INPUT_CONTAINER_REGISTRY_URL" \
-            -e "INPUT_CONTAINER_REGISTRY_USERNAME" \
-            -e "INPUT_CONTAINER_REGISTRY_PASSWORD" \
-            -e "HOME" \
-            -e "GITHUB_JOB" \
-            -e "GITHUB_REF" \
-            -e "GITHUB_SHA" \
-            -e "GITHUB_REPOSITORY" \
-            -e "GITHUB_REPOSITORY_OWNER" \
-            -e "GITHUB_REPOSITORY_OWNER_ID" \
-            -e "GITHUB_RUN_ID" \
-            -e "GITHUB_RUN_NUMBER" \
-            -e "GITHUB_RETENTION_DAYS" \
-            -e "GITHUB_RUN_ATTEMPT" \
-            -e "GITHUB_REPOSITORY_ID" \
-            -e "GITHUB_ACTOR_ID" \
-            -e "GITHUB_ACTOR" \
-            -e "GITHUB_TRIGGERING_ACTOR" \
-            -e "GITHUB_WORKFLOW" \
-            -e "GITHUB_HEAD_REF" \
-            -e "GITHUB_BASE_REF" \
-            -e "GITHUB_EVENT_NAME" \
-            -e "GITHUB_SERVER_URL" \
-            -e "GITHUB_API_URL" \
-            -e "GITHUB_GRAPHQL_URL" \
-            -e "GITHUB_REF_NAME" \
-            -e "GITHUB_REF_PROTECTED" \
-            -e "GITHUB_REF_TYPE" \
-            -e "GITHUB_WORKFLOW_REF" \
-            -e "GITHUB_WORKFLOW_SHA" \
-            -e "GITHUB_WORKSPACE" \
-            -e "GITHUB_ACTION" \
-            -e "GITHUB_EVENT_PATH")
-          
-          echo "Docker output:"
-          echo "$docker_output"
-
-          # Attempt to parse the JSON output (adjust jq parsing as needed)
-          echo "$docker_output" | jq .
-
+      - name: run-build-scripts
+        uses: ./.github/actions/build-environment
+        with:
+          build_args: ${{ env.BUILD_ARGS }}
+          working_directory: ${{ env.WORKING_DIRECTORY }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
