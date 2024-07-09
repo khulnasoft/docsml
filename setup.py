@@ -12,8 +12,8 @@ NAME = "docsml"
 MAIN_PACKAGE = "docsml"  # Change if main package != NAME
 DESCRIPTION = "Generate markdown API documentation for Google-style Python docstring."
 URL = "https://github.com/khulnasoft/docsml"
-EMAIL = "team@khulnasoft.org"
-AUTHOR = "ML Tooling Team"
+EMAIL = "info@khulnasoft.org"
+AUTHOR = "KhulnaSoft DevOps"
 LICENSE = "MIT"
 REQUIRES_PYTHON = ">=3.6"
 VERSION = None  # Only set version if you like to overwrite the version in _about.py

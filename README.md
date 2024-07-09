@@ -14,7 +14,7 @@
     <a href="https://github.com/khulnasoft/docsml/actions?query=workflow%3Abuild-pipeline" title="Build status"><img src="https://img.shields.io/github/workflow/status/khulnasoft/docsml/build-pipeline?style=flat"></a>
     <a href="https://github.com/khulnasoft/docsml/blob/main/LICENSE" title="Project License"><img src="https://img.shields.io/badge/License-MIT-green.svg?style=flat"></a>
     <a href="https://gitter.im/khulnasoft/docsml" title="Chat on Gitter"><img src="https://badges.gitter.im/khulnasoft/docsml.svg"></a>
-    <a href="https://twitter.com/khulnasoft" title="ML Tooling on Twitter"><img src="https://img.shields.io/twitter/follow/khulnasoft.svg?label=follow&style=social"></a>
+    <a href="https://twitter.com/khulnasoft" title="KhulnaSoft on Twitter"><img src="https://img.shields.io/twitter/follow/khulnasoft.svg?label=follow&style=social"></a>
 </p>
 
 <p align="center">
@@ -62,15 +62,15 @@ With the default configuration, the Markdown documentation will be generated ins
 
 ## Support & Feedback
 
-This project is maintained by [Benjamin Räthlein](https://twitter.com/raethlein), [Lukas Masuch](https://twitter.com/LukasMasuch), and [Jan Kalkan](https://www.linkedin.com/in/jan-kalkan-b5390284/). Please understand that we won't be able to provide individual support via email. We also believe that help is much more valuable if it's shared publicly so that more people can benefit from it.
+This project is maintained by [Benjamin Räthlein](https://twitter.com/nxpkg), [Lukas Masuch](https://twitter.com/gitworkflows), and [Jan Kalkan](https://www.linkedin.com/in/jan-kalkan-b5390284/). Please understand that we won't be able to provide individual support via email. We also believe that help is much more valuable if it's shared publicly so that more people can benefit from it.
 
 | Type                     | Channel                                              |
 | ------------------------ | ------------------------------------------------------ |
 | 🚨&nbsp; **Bug Reports**       | <a href="https://github.com/khulnasoft/docsml/issues?utf8=%E2%9C%93&q=is%3Aopen+is%3Aissue+label%3Abug+sort%3Areactions-%2B1-desc+" title="Open Bug Report"><img src="https://img.shields.io/github/issues/khulnasoft/docsml/bug.svg?label=bug"></a>                                 |
 | 🎁&nbsp; **Feature Requests**  | <a href="https://github.com/khulnasoft/docsml/issues?q=is%3Aopen+is%3Aissue+label%3Afeature+sort%3Areactions-%2B1-desc" title="Open Feature Request"><img src="https://img.shields.io/github/issues/khulnasoft/docsml/feature.svg?label=feature%20request"></a>                                 |
 | 👩‍💻&nbsp; **Usage Questions**   |   <a href="https://stackoverflow.com/questions/tagged/khulnasoft" title="Open Question on Stackoverflow"><img src="https://img.shields.io/badge/stackoverflow-ml--tooling-orange.svg"></a> <a href="https://gitter.im/khulnasoft/docsml" title="Chat on Gitter"><img src="https://badges.gitter.im/khulnasoft/docsml.svg"></a> |
-| 🗯&nbsp; **General Discussion** | <a href="https://gitter.im/khulnasoft/docsml" title="Chat on Gitter"><img src="https://badges.gitter.im/khulnasoft/docsml.svg"></a> <a href="https://twitter.com/khulnasoft" title="ML Tooling on Twitter"><img src="https://img.shields.io/twitter/follow/khulnasoft.svg?style=social"></a>|
-| ❓&nbsp; **Other Requests** | <a href="mailto:team@khulnasoft.org" title="Email ML Tooling Team"><img src="https://img.shields.io/badge/email-ML Tooling-green?logo=mail.ru&logoColor=white"></a> |
+| 🗯&nbsp; **General Discussion** | <a href="https://gitter.im/khulnasoft/docsml" title="Chat on Gitter"><img src="https://badges.gitter.im/khulnasoft/docsml.svg"></a> <a href="https://twitter.com/khulnasoft" title="KhulnaSoft on Twitter"><img src="https://img.shields.io/twitter/follow/khulnasoft.svg?style=social"></a>|
+| ❓&nbsp; **Other Requests** | <a href="mailto:team@khulnasoft.org" title="Email KhulnaSoft DevOps"><img src="https://img.shields.io/badge/email-KhulnaSoft-green?logo=mail.ru&logoColor=white"></a> |
 
 ## Features
 

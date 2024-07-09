@@ -8,7 +8,7 @@ def test_import2md() -> None:
     markdown = generator.import2md(MarkdownGenerator.import2md)
     # Remove whitespaces: fix changes between py version 3.6 3.7 in signature method
     md_hash = hashlib.md5(markdown.replace(" ", "").encode("utf-8")).hexdigest()
-    assert md_hash == "4f5254f4be4158f984b7a9741d118698"
+    assert md_hash == "0c975ff6219a5eb16d7ca6bb66fdefdb"
 
 
 def test_class2md() -> None:
@@ -16,7 +16,7 @@ def test_class2md() -> None:
     markdown = generator.class2md(MarkdownGenerator)
     # Remove whitespaces: fix changes between py version 3.6 3.7 in signature method
     md_hash = hashlib.md5(markdown.replace(" ", "").encode("utf-8")).hexdigest()
-    assert md_hash == "ea0ad63a9018a85d8d76f9a6ad7f7985"
+    assert md_hash == "08417dac9c303454037e324a33855c75"
 
 
 def test_module2md() -> None:
@@ -26,7 +26,7 @@ def test_module2md() -> None:
     markdown = generator.module2md(generation)
     # Remove whitespaces: fix changes between py version 3.6 3.7 in signature method
     md_hash = hashlib.md5(markdown.replace(" ", "").encode("utf-8")).hexdigest()
-    assert md_hash == "e4637206eb4f1fb27360eed8cb3d99e2"
+    assert md_hash == "463ef2aa337dbb85e9e978dc131b1721"
 
 
 def test_func2md() -> None:
@@ -34,4 +34,4 @@ def test_func2md() -> None:
     markdown = generator.func2md(MarkdownGenerator.func2md)
     # Remove whitespaces: fix changes between py version 3.6 3.7 in signature method
     md_hash = hashlib.md5(markdown.replace(" ", "").encode("utf-8")).hexdigest()
-    assert md_hash == "797bad8c00ee6f189cb6f578eaec02c4"
+    assert md_hash == "5d75b095249eb96d9707c756a61ea7e0"

@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 this-package = {editable = true, path = "."}
+docsml = {editable = true, path = "."}
 
 [dev-packages]
 this-package = {editable = true, extras = ["dev"], path = "."}
