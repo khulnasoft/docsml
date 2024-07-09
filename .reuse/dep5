@@ -1,10 +1,10 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: docsml
-Upstream-Contact: Lukas Masuch <lukas.masuch@gmail.com>
-                  Benjamin nxpkg <benjamin.nxpkg@gmail.com>
-                  Jan Kalkan <kalkan.jan@gmail.com>
+Upstream-Contact: Md Sulaiman <infosulaimanbd@gmail.com>
+                  Abdullah Al-Mamun <iconmamundentist@gmail.com>
+                  KhulnaSoft Bot <info@khulnasoft.com>
 Source: https://github.com/khulnasoft/docsml
 
 Files: **
-Copyright: Lukas Masuch, Benjamin Raehtlein, and Jan Kalkan
+Copyright: Md Sulaiman, Abdullah Al-Mamun, and KhulnaSoft Bot
 License: MIT
