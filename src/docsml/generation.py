@@ -136,8 +136,10 @@ def _get_function_signature(
     if isclass:
         function = getattr(function, "__init__", lambda: None)
 
-    arguments = []
-    return_type = ""
+    if isclass:
+        function = getattr(function, "__init__", lambda: None)
+        arguments = []
+        return_type = ""
     if hasattr(inspect, "signature"):
         parameters = inspect.signature(function).parameters
         if inspect.signature(function).return_annotation != inspect.Signature.empty:
