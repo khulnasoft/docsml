@@ -134,7 +134,7 @@ def _get_function_signature(
     name = ".".join(name_parts)
 
     if isclass:
-        function = getattr(function, "__init__", lambda: None)
+        function = getattr(function, "__init__", lambda: raise AttributeError("Class has no __init__"))
 
     if isclass:
         function = getattr(function, "__init__", lambda: None)
