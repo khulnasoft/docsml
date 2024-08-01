@@ -134,12 +134,14 @@ def _get_function_signature(
     name = ".".join(name_parts)
 
     if isclass:
-        function = getattr(function, "__init__", lambda: raise AttributeError("Class has no __init__"))
+        function = getattr(function, "__init__", raise_attribute_error)
+
+    arguments = []
+    return_type = ""
 
     if isclass:
         function = getattr(function, "__init__", lambda: None)
-        arguments = []
-        return_type = ""
+
     if hasattr(inspect, "signature"):
         parameters = inspect.signature(function).parameters
         if inspect.signature(function).return_annotation != inspect.Signature.empty:
@@ -177,20 +179,10 @@ def _get_function_signature(
                     )
                     argument = "=".join(argument_split)
             arguments.append(argument)
-    else:
-        print("Seems like function " + name + " does not have any signature")
 
-    signature = name + "("
-    if wrap_arguments:
-        for i, arg in enumerate(arguments):
-            signature += "\n    " + arg
-
-            signature += "," if i is not len(arguments) - 1 else "\n"
-    else:
-        signature += ", ".join(arguments)
-
-    signature += ")" + ((" → " + return_type) if return_type else "")
-
+    signature = f"{name}({', '.join(arguments)})"
+    if return_type:
+        signature += f" -> {return_type}"
     return signature
 
 
