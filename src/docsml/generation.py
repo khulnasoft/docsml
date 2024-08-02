@@ -134,14 +134,10 @@ def _get_function_signature(
     name = ".".join(name_parts)
 
     if isclass:
-        function = getattr(function, "__init__", raise_attribute_error)
+        function = getattr(function, "__init__", None)
 
     arguments = []
     return_type = ""
-
-    if isclass:
-        function = getattr(function, "__init__", lambda: None)
-
     if hasattr(inspect, "signature"):
         parameters = inspect.signature(function).parameters
         if inspect.signature(function).return_annotation != inspect.Signature.empty:
@@ -179,10 +175,20 @@ def _get_function_signature(
                     )
                     argument = "=".join(argument_split)
             arguments.append(argument)
+    else:
+        print("Seems like function " + name + " does not have any signature")
 
-    signature = f"{name}({', '.join(arguments)})"
-    if return_type:
-        signature += f" -> {return_type}"
+    signature = name + "("
+    if wrap_arguments:
+        for i, arg in enumerate(arguments):
+            signature += "\n    " + arg
+
+            signature += "," if i is not len(arguments) - 1 else "\n"
+    else:
+        signature += ", ".join(arguments)
+
+    signature += ")" + ((" → " + return_type) if return_type else "")
+
     return signature
 
 
@@ -198,7 +204,7 @@ def to_md_file(
     out_path: str = ".",
     watermark: bool = True,
     disable_markdownlint: bool = True,
-    is_mdx: bool = False,
+    is_mdx: bool = False
 ) -> None:
     """Creates an API docs file from a provided text.
 
@@ -214,7 +220,7 @@ def to_md_file(
         return
 
     md_file = filename
-
+    
     if is_mdx:
         if not filename.endswith(".mdx"):
             md_file = filename + ".mdx"
@@ -525,9 +531,7 @@ class MarkdownGenerator(object):
 
         return relative_path
 
-    def func2md(
-        self, func: Callable, clsname: str = "", depth: int = 3, is_mdx: bool = False
-    ) -> str:
+    def func2md(self, func: Callable, clsname: str = "", depth: int = 3, is_mdx: bool = False) -> str:
         """Takes a function (or method) and generates markdown docs.
 
         Args:
@@ -610,7 +614,7 @@ class MarkdownGenerator(object):
         if path:
             if is_mdx:
                 markdown = _MDX_SOURCE_BADGE_TEMPLATE.format(path=path) + markdown
-            else:
+            else:    
                 markdown = _SOURCE_BADGE_TEMPLATE.format(path=path) + markdown
 
         return markdown
@@ -707,9 +711,7 @@ class MarkdownGenerator(object):
                 # object module should be the same as the calling module
                 and obj.__module__ == modname
             ):
-                function_md = self.func2md(
-                    obj, clsname=clsname, depth=depth + 1, is_mdx=is_mdx
-                )
+                function_md = self.func2md(obj, clsname=clsname, depth=depth + 1, is_mdx=is_mdx)
                 if function_md:
                     methods.append(_SEPARATOR + function_md)
 
@@ -731,9 +733,7 @@ class MarkdownGenerator(object):
 
         return markdown
 
-    def module2md(
-        self, module: types.ModuleType, depth: int = 1, is_mdx: bool = False
-    ) -> str:
+    def module2md(self, module: types.ModuleType, depth: int = 1, is_mdx: bool = False) -> str:
         """Takes an imported module object and create a Markdown string containing functions and classes.
 
         Args:
@@ -824,7 +824,7 @@ class MarkdownGenerator(object):
         )
 
         if path:
-            if is_mdx:
+            if (is_mdx):
                 markdown = _MDX_SOURCE_BADGE_TEMPLATE.format(path=path) + markdown
             else:
                 markdown = _SOURCE_BADGE_TEMPLATE.format(path=path) + markdown
@@ -948,11 +948,9 @@ def generate_docs(
     if not ignored_modules:
         ignored_modules = list()
 
-    if output_format and output_format != "md" and output_format != "mdx":
-        raise Exception(
-            f"Unsupported output format: {output_format}. Choose either 'md' or 'mdx'."
-        )
-    is_mdx = output_format == "mdx"
+    if output_format and output_format != 'md' and output_format != 'mdx':
+        raise Exception(f"Unsupported output format: {output_format}. Choose either 'md' or 'mdx'.")
+    is_mdx = output_format == 'mdx'
 
     if not src_root_path:
         try:
@@ -1097,7 +1095,7 @@ def generate_docs(
                                     mod.__name__,
                                     out_path=output_path,
                                     watermark=watermark,
-                                    is_mdx=is_mdx,
+                                    is_mdx=is_mdx
                                 )
                         except Exception as ex:
                             print(
@@ -1110,11 +1108,7 @@ def generate_docs(
                         print(import_md)
                     else:
                         to_md_file(
-                            import_md,
-                            path,
-                            out_path=output_path,
-                            watermark=watermark,
-                            is_mdx=is_mdx,
+                            import_md, path, out_path=output_path, watermark=watermark, is_mdx=is_mdx
                         )
             else:
                 raise Exception(f"Failed to generate markdown for {path}.")
@@ -1132,7 +1126,7 @@ def generate_docs(
             overview_file,
             out_path=output_path,
             watermark=watermark,
-            is_mdx=is_mdx,
+            is_mdx=is_mdx
         )
 
         # Write mkdocs pages file
